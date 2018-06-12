@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
+  <script>
+
+        $(document).ready(function(){
+            $('#form_id').validate({
+                
+                rules:{
+                    user:'required',
+                    password:{required : true, minlength : 6},
+                    cpassword:{
+                        equalTo:'#password'
+                    },
+                    email:{
+                        required:true
+                    }
+                   
+                },
+                messages:{
+                    user:'please enter username',
+                    password:{required:'please enter password',minlength : 'password should be atleast 6 characters'},
+                    cpassword:'password must be same as above',
+                    email:'please enter your email address'
+                }
+            });
+        });
+    </script>
+  
+    
+    <script>
+        $(document).ready(function(){
+            var to;
+            $("#btnvalidate").click(function(){     
+                to=$("#email").val();
+//                $("#message").text("Sending E-mail...Please wait");
+                $.get("http://localhost:3000/send",{to:to},function(data){
+                if(data=="sent")
+                {
+                    $("#message").empty().html(" Email is been sent at "+to+" . Please check inbox!");
+                }
+
+                });
+            });
+        });
+</script>
+<style>
+      .modal-header, h4, .close {
+      background-color: #5cb85c;
+      color:white !important;
+      text-align: center;
+      font-size: 30px;
+  }
+  .modal-footer {
+      background-color: #f9f9f9;
+  }
+</style>
+ 
+</head>
+<body>
+    
+  
+         
+            <!-- <button type="button" class="btn btn-default btn-lg" id="myBtn">signUp</button> -->
+                    
+                        <div class="modal-header" style="padding:30px 50px;">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4><span class="glyphicon glyphicon-lock"></span>signUp</h4>
+                        </div>
+                        <div class="modal-body" style="padding:40px 50px;">
+                            <form action="register" id="form_id" method="post" role="form">
+                                <div class="form-group">
+                                    <label for="user"><span class="glyphicon glyphicon-user"></span>Username:</label>
+                                    <input name='user' id="username" class="form-control" type="text" placeholder="username">
+                                </div>
+                                <div class="form-group">
+                                    <label for="pwd"><span class="glyphicon glyphicon-eye-open"></span>Password:</label>
+                                    <input name='password' id="password" class="form-control" type='password'placeholder="password">
+                                 </div>
+                                 <div class="form-group">
+                                    <label for="pwd"><span class="glyphicon glyphicon-eye-open"></span>confirm Password:</label>
+                                    <input name='cpassword' id="confirm-password" class="form-control" type='password' placeholder="confirm password">
+                                </div>
+                                <div class="form-group">
+                                    <label for="email"><span class="glyphicon glyphicon-envelope"></span>email:</label>
+                                    <input name='email' id="email" class="form-control" type='email' placeholder="email" required\>
+                                </div>
+                                <button type="submit" id="btnvalidate" class="btn btn-warning">Register</button> 
+
+                            </form>
+                        </div>
+            
+            <script>
+                    $(document).ready(function(){
+                        $("#myBtn").click(function(){
+                            $("#mymodal").modal();
+                        });
+                    });
+                    </script>
+
+        
+                
+  </body>
+</html>

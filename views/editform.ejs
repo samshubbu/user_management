@@ -1,0 +1,60 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function(){
+         $('#FileUpload').change(
+                function () {
+                    var fileExtension = ['png','jpg'];
+                    if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+                     document.getElementById('alertmsg').innerHTML=" *Only '.png' ''  format is allowed.";   
+//                        alert("Only '.png'  format is allowed.");
+                        this.value = ''; // Clean field
+                        return false;
+                    }
+                });            
+            });
+        
+    </script>
+    <body >
+        
+        <div style="background-color:silver;">                   
+            <h1>Update Record22</h1>
+            <form action='updateUser' id="form1" enctype="multipart/form-data" method='post' onSubmit="validate">
+                <table>
+                    <tr>
+                        <td><img src="../images/<%=user.Photo%>" width="150" height="150"></td>
+                        <td><input type="file" name="myfile" id="FileUpload"></td>
+                        <td><span id="alertmsg" style="color:red"></span></td>
+                    </tr> 
+                    
+                    <tr>
+                        <td>Name:</td>                
+                        <td><input type="hidden" name="id" value="<%= user.id %>" />
+                            <input type='text' name="name" value="<%= user.name %>" placeholder="name"></td><br>
+                    </tr>
+                    <tr>
+                        <td>Address:</td>
+                        <td><input type='text' name='address' value="<%= user.address %>" placeholder="address"></td>
+                    </tr> 
+
+                    <tr>
+                        <td><input type="submit" value='Update User'></td>
+                        
+                    </tr>
+                
+                </table>
+                  <% if (typeof updateuser =='object' && updateuser)  {%> 
+                        <p> The updated Record is </p>
+                <%}%>
+<!--                    <a href="removephoto" >Remove photo</a>-->
+            
+            </form>
+    
+        </div>
+        <h1>Hello! here is your data</h1>
+    </body>
+</html>

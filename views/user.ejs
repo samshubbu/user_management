@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
+  <script>
+        function validate(){  
+            
+            var name=document.getElementById('username').value;  
+            var password=document.getElementById('password').value;  
+           
+            
+            if(name=="" && password==""){
+                alert("please enter name and password");
+                return false;
+            }
+            
+          else  if (name==null || name==""){  
+              alert("Name can't be blank");  
+              return false;  
+            }
+            else if(password.length<6){  
+              alert("Password must be at least 6 characters long.");  
+              return false;  
+              }
+        }
+  </script>
+
+   
+</head>
+<body style="background-color: silver">
+
+        
+        <script>
+             setTimeout(function() {
+            $('#successMessage').fadeOut('fast');
+            }, 2000);
+        </script>
+    <div id="successMessage" style="text-align:center; width:100%">
+             <FONT color="blue" > 
+                        
+                
+             <%- messages('my_message_template', locals) %>
+                    
+            
+        </FONT>
+    </div>
+        <div class="container" style="margin-top:100px">
+            
+          
+
+            <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                 <img class="img-responsive align-centre" src="../images/logo.png" >
+                  
+                    <h4> <strong> Login Details</strong></h4>
+                </div>
+                <div class="panel-body panel-warning">
+
+                <form action="loggedin" id="form_id" method="post" onSubmit="return validate()">
+
+                    <div class="form-group input-group">
+<!--                        <label class="sr-only" for="username">username</label>-->
+                        <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
+                        <input name='user' id="username" class="form-control" type="text" placeholder="username">
+
+                    </div>
+                    <div class="form-group input-group">
+<!--                        <label for="password">Password:</label>-->
+                        <div class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></div>
+                        <input name='password' id="password" class="form-control" type='password' placeholder="password">
+                    </div>
+                        <button type="submit" id="submit1" class="btn btn-default" style="float:left" >Login</button>
+                        <a href="forgot-password" style="float:right">forgot password</a>
+                 
+                        <br>
+
+                </form>
+                  
+                   <!-- <div id="d1">
+                    <form action="signup" id="form_id1" method="post">
+                        <div class="form-group">
+                            <h4 style="float: left"> New user..? Signup here</h4>
+                            <input type="submit" id="submit1" class="btn btn-success" style="float: left" value="signup">
+
+                        </div> -->
+
+                    </form>
+                    </div>
+              
+                    </div>
+                </div>
+            </div>
+        </div>
+   
+        
+</body>
+</html>

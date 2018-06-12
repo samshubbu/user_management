@@ -1,0 +1,42 @@
+<html>
+<head>
+    <title>
+    
+    </title>
+    
+    <script>
+        $(document).ready(function(){
+            var from,to,subject,text;
+            $("#send_email").click(function(){     
+                to=$("#to").val();
+                subject=$("#subject").val();
+                text=$("#content").val();
+                $("#message").text("Sending E-mail...Please wait");
+                $.get("http://localhost:3000/send",{to:to,subject:subject,text:text},function(data){
+                if(data=="sent")
+                {
+                    $("#message").empty().html("Email is been sent at "+to+" . Please check inbox!");
+                }
+
+                });
+            });
+        });
+</script>
+    </head>
+<body>
+    <div id="container">
+        <div>
+            Node.JS Email application</div>
+            <div>
+                <form action="send" method="post">
+                    <h1>Mailer In Node.JS</h1>
+                    <input id="to" name="to" type="text" placeholder="Enter E-mail ID where you want to send" /><br>
+                    <input id="subject" name="subject" type="text" placeholder="Write Subject" /><br>
+                    <textarea id="content" name="text" cols="40" rows="5" placeholder="Write what you want to send"></textarea><br>
+                    <button type="submit" id="send_email">Send Email</button>
+                    <span id="message" name="message"></span>
+                </form>
+           </div>
+    </div>
+    </body>
+</html>
